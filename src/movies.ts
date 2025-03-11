@@ -54,8 +54,7 @@ const movies: Movie[] = [
  */
 function hasKey(obj: object, key: string): boolean {
   // write your code here...
-
-  return true; // replace true with what you see is fit
+  return key in obj;
 }
 
 /**
@@ -65,6 +64,7 @@ function hasKey(obj: object, key: string): boolean {
  */
 function printMovieTitles(movies: Movie[]): void {
   // write your code here...
+  movies.forEach(movie=> console.log(movie.title))
 }
 
 /**
@@ -80,8 +80,7 @@ function printMovieTitles(movies: Movie[]): void {
  */
 function countMoviesByYear(movies: Movie[], year: number): number {
   // write your code here...
-
-  return -1; // replace -1 with what you see is fit
+  return movies.filter(movie=>movie.year === year).length
 }
 
 /**
@@ -109,8 +108,11 @@ function updateMovieGenre(
   newGenre: string
 ): Movie[] {
   // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  return movies.map(movie=> {
+      if(movie.title === title)
+        movie.genre = newGenre;
+      return movie;
+  })
 }
 
 export { Movie, hasKey, printMovieTitles, countMoviesByYear, updateMovieGenre };
