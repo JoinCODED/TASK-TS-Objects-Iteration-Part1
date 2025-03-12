@@ -2,7 +2,7 @@ interface Movie {
   title: string;
   director: string;
   year: number;
-  genre: string;
+  genre?: string | undefined;
 }
 
 /**
@@ -55,7 +55,7 @@ const movies: Movie[] = [
 function hasKey(obj: object, key: string): boolean {
   // write your code here...
 
-  return true; // replace true with what you see is fit
+  return obj.hasOwnProperty(key); // replace true with what you see is fit
 }
 
 /**
@@ -65,6 +65,9 @@ function hasKey(obj: object, key: string): boolean {
  */
 function printMovieTitles(movies: Movie[]): void {
   // write your code here...
+  for(let movie of movies){
+    console.log(movie.title)
+  }
 }
 
 /**
@@ -80,8 +83,14 @@ function printMovieTitles(movies: Movie[]): void {
  */
 function countMoviesByYear(movies: Movie[], year: number): number {
   // write your code here...
-
-  return -1; // replace -1 with what you see is fit
+let counter = 0
+movies.forEach(element => {
+  if(element.year === year)
+  {
+    counter++;
+  }
+});
+  return counter; // replace -1 with what you see is fit
 }
 
 /**
@@ -109,8 +118,10 @@ function updateMovieGenre(
   newGenre: string
 ): Movie[] {
   // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  movies.forEach((movie) =>
+    movie.title === title ? (movie.genre = newGenre) : movie
+  );
+  return movies;
 }
 
 export { Movie, hasKey, printMovieTitles, countMoviesByYear, updateMovieGenre };
