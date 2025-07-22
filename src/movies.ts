@@ -53,9 +53,7 @@ const movies: Movie[] = [
  *  hasKey({ title: "Inception", year: 2010 }, "director"); // => false
  */
 function hasKey(obj: object, key: string): boolean {
-  // write your code here...
-
-  return true; // replace true with what you see is fit
+  return key in obj; // replace true with what you see is fit
 }
 
 /**
