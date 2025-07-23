@@ -55,8 +55,11 @@ const movies: Movie[] = [
 function hasKey(obj: object, key: string): boolean {
   // write your code here...
 
-  return true; // replace true with what you see is fit
+  return key in obj;
 }
+// Example usage
+console.log(hasKey({ title: "Inception", year: 2010 }, "title"));
+console.log(hasKey({ title: "Inception", year: 2010 }, "director"));
 
 /**
  * `printMovieTitles` function that:
@@ -65,7 +68,13 @@ function hasKey(obj: object, key: string): boolean {
  */
 function printMovieTitles(movies: Movie[]): void {
   // write your code here...
+
+  movies.forEach((movie) => {
+    console.log(movie.title);
+  });
 }
+
+printMovieTitles(movies);
 
 /**
  * `countMoviesByYear` function that:
@@ -79,10 +88,19 @@ function printMovieTitles(movies: Movie[]): void {
  *   countMoviesByYear(movies, 2025); // => 0
  */
 function countMoviesByYear(movies: Movie[], year: number): number {
-  // write your code here...
+  let count = 0;
 
-  return -1; // replace -1 with what you see is fit
+  movies.forEach((movie) => {
+    if (movie.year === year) {
+      count++;
+    }
+  });
+
+  return count;
 }
+console.log(countMoviesByYear(movies, 1994));
+console.log(countMoviesByYear(movies, 2008));
+console.log(countMoviesByYear(movies, 2025));
 
 /**
  * `updateMovieGenre` function that::
@@ -103,14 +121,22 @@ function countMoviesByYear(movies: Movie[], year: number): number {
  *    { title: "Forrest Gump", genre: "Drama", ... }
  *  ]
  */
+
 function updateMovieGenre(
   movies: Movie[],
   title: string,
   newGenre: string
 ): Movie[] {
-  // write your code here...
+  const movie = movies.find((movie) => movie.title === title);
 
-  return []; // replace empty array with what you see is fit
+  if (movie) {
+    movie.genre = newGenre;
+  }
+  return movies;
 }
 
+console.log(updateMovieGenre(movies, "Pulp Fiction", "Romantic Comedy"));
+console.log(updateMovieGenre(movies, "The Godfather", "Drama"));
+console.log(updateMovieGenre(movies, "The Shawshank Redemption", "Thriller"));
+console.log(updateMovieGenre(movies, "The Dark Knight", "Superhero"));
 export { Movie, hasKey, printMovieTitles, countMoviesByYear, updateMovieGenre };
